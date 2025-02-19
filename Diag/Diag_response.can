@@ -1,0 +1,72 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  message 0x601 msg_res;
+}
+
+// positive response
+on message 0x701
+{
+  msg_res.dlc = 0x08;
+  if (this.byte(1) == 0x10 && this.byte(2) == 0x01)
+  {
+    msg_res.byte(0)=0x06;
+    msg_res.byte(1)=0x50;
+    msg_res.byte(2)=0x01;
+    msg_res.byte(3)=0x01;
+    msg_res.byte(4)=0xF4;
+    msg_res.byte(5)=0x13;
+    msg_res.byte(6)=0x88;
+    output(msg_res);
+  }
+  
+  else if (this.byte(1) == 0x10 && this.byte(2) == 0x02)
+  {
+    msg_res.byte(0)=0x06;
+    msg_res.byte(1)=0x50;
+    msg_res.byte(2)=0x02;
+    msg_res.byte(3)=0x01;
+    msg_res.byte(4)=0xF4;
+    msg_res.byte(5)=0x13;
+    msg_res.byte(6)=0x88;
+    output(msg_res);
+  }
+  
+  else if (this.byte(1) == 0x10 && this.byte(2) == 0x03)
+  {
+    msg_res.byte(0)=0x06;
+    msg_res.byte(1)=0x50;
+    msg_res.byte(2)=0x03;
+    msg_res.byte(3)=0x01;
+    msg_res.byte(4)=0xF4;
+    msg_res.byte(5)=0x13;
+    msg_res.byte(6)=0x88;
+    output(msg_res);
+  }
+  
+  else if (this.byte(1) == 0x10 && (this.byte(2) != 0x01 || this.byte(2) != 0x02 || this.byte(2) != 0x03))
+  {
+    msg_res.byte(0)=0x03;
+    msg_res.byte(1)=0x7F;
+    msg_res.byte(2)=0x10;
+    msg_res.byte(3)=0x12;
+    output(msg_res);
+  }
+  
+    else if (this.byte(1) != 0x10 || this.byte(1) != 0x11 || this.byte(1) != 0x19)
+  {
+    msg_res.byte(0)=0x03;
+    msg_res.byte(1)=0x7F;
+    msg_res.byte(2)=this.byte(1);
+    msg_res.byte(3)=0x11;
+    output(msg_res);
+  }
+}
+
+//negative response
+

@@ -1,0 +1,60 @@
+/*@!Encoding:1252*/
+includes
+{
+  
+}
+
+variables
+{
+  message 0x701 msg_req;
+}
+
+//default session
+on key 'a'
+{
+  msg_req.dlc=8;
+  msg_req.byte(0)= 0x02;
+  msg_req.byte(1)=0x10;
+  msg_req.byte(2)=0x01;
+  output(msg_req);
+}
+
+//programming session
+on key 'b'
+{
+  msg_req.dlc=8;
+  msg_req.byte(0)= 0x02;
+  msg_req.byte(1)=0x10;
+  msg_req.byte(2)=0x02;
+  output(msg_req);
+}
+
+//extended session
+on key 'c'
+{
+  msg_req.dlc=8;
+  msg_req.byte(0)= 0x02;
+  msg_req.byte(1)=0x10;
+  msg_req.byte(2)=0x03;
+  output(msg_req);
+}
+
+//wrong subfunction session
+on key 'd'
+{
+  msg_req.dlc=8;
+  msg_req.byte(0)= 0x02;
+  msg_req.byte(1)=0x10;
+  msg_req.byte(2)=0x07;
+  output(msg_req);
+}
+
+//wrong service id
+on key 'e'
+{
+  msg_req.dlc=8;
+  msg_req.byte(0)= 0x02;
+  msg_req.byte(1)=0x98;
+  msg_req.byte(2)=0x01;
+  output(msg_req);
+}
